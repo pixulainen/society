@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 
     before_action :find_post, only: [:show, :edit, :update, :destroy]
 
-    def show 
+    def show
     end
 
     def new
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
         # else
         #     render :new
         # end
-        redirect_to posts_path
+        redirect_to user_path
     end
 
     def update 
@@ -42,6 +42,6 @@ class PostsController < ApplicationController
     end
 
     def find_post
-        Post.find(params[:id])
+       @post = Post.find(params[:id])
     end
 end

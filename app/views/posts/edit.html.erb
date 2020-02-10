@@ -1,0 +1,22 @@
+<% if @post.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being created:</h2>
+
+    <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_for(@post) do |f| %>
+
+    
+    <%= f.label :content %>
+    <%= f.text_field :content%><br>
+
+    <%= f.submit %>
+
+<% end %>

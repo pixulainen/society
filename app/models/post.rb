@@ -7,6 +7,4 @@ class Post < ApplicationRecord
         presence: true
     }
 
-   
-
 end
