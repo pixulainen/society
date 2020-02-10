@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :surname
       t.integer :age
       t.text :bio
-
+      t.string :avatar
       t.timestamps
     end
   end
