@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
-
-    before_action :find_post, only: [:show, :edit, :update, :destroy]
-
+    # before_action :authorize_user, only: [:new,:create,:edit,:update,:destroy]
+    # before_action :find_post, only: [:show, :edit, :update, :destroy]
+    # before_action :post_belongs_to_current_user?, only: [:edit, :update, :destroy]
     def show 
+        @post = Post.find(params[:id])
     end
 
     def new
@@ -14,13 +15,14 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.create(post_params)
-
-        # if valid?
-        #     redirect_to ?
-        # else
-        #     render :new
-        # end
-        redirect_to posts_path
+        @post.user_id = current_user
+        @post.save
+        if @post.valid?
+            redirect_to user_path(@user)
+        else
+            render :new
+        end
+       
     end
 
     def update 
@@ -34,14 +36,19 @@ class PostsController < ApplicationController
         redirect to posts_path
     end
 
-
-    private
-
-    def post_params
-        params.require(:post).permit(:content)
-    end
-
     def find_post
         Post.find(params[:id])
     end
+    private
+
+    def post_params
+        params.require(:post).permit(:content,:user_id)
+    end
+    def post_belongs_to_current_user?
+        unless post.find(params[:id]).user == current_user
+          flash[:notice] = "Please leave other people's posts alone :("
+          redirect_to posts_path
+        end
+    end
+    
 end

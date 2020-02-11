@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-    def show
-        @user = User.find(params[:id])
+    
+    def index
+      @users = User.all
     end
-
     def new
         @user = User.new
     end
@@ -34,13 +34,15 @@ class UsersController < ApplicationController
           format.json { head :no_content }
         end
       end
-    
+      def show
+        @user = User.find(params[:id])
+      end
       private
         def set_user
           @user = User.find(params[:id])
         end
     
         def user_params
-          params.fetch(:user, {})
+          params.require(:user).permit(:username, :email, :password)
         end
 end
