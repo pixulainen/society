@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-    
+    def login
+      @user = Usern.new
+    end
     def index
       @users = User.all
     end
@@ -16,18 +18,12 @@ class UsersController < ApplicationController
         redirect_to '/welcome'
     end
     def update
-        respond_to do |format|
-          if @user.update(user_params)
-            format.html { redirect_to @user, notice: 'User was successfully updated.' }
-            format.json { render :show, status: :ok, location: @user }
-          else
-            format.html { render :edit }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
-          end
-        end
-      end
+      @user = User.find(params[:id])
+      @user.update(edit_params)
+      redirect_to user_path(@user.id)
+    end
     
-      def destroy
+    def destroy
         @user.destroy
         respond_to do |format|
           format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
@@ -43,6 +39,11 @@ class UsersController < ApplicationController
         end
     
         def user_params
-          params.require(:user).permit(:username, :email, :password)
+          params.require(:user).permit(:username, :email, :password,:name,:surname,:age,:bio)
         end
+
+        def edit_params
+          params.require(:user).permit(:name, :surname, :bio, :age)
+        end
+
 end
