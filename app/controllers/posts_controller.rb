@@ -19,6 +19,7 @@ class PostsController < ApplicationController
         @post.user = current_user
         @post.save
         if @post.valid?
+            flash[:notice] = "Post successful!"
             redirect_to user_path(current_user)
         else
             render :new
@@ -33,6 +34,7 @@ class PostsController < ApplicationController
 
     def destroy
         Post.destroy(params[:id])
+        flash[:notice] = "Post was deleted."
         redirect_to user_path(current_user)
     end
 
