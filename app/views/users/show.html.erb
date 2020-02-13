@@ -15,8 +15,9 @@
 
 <% @a = @user.posts.order(id: :desc)%>
 <% @a.each do |post| %>
-  <%= post.content %><br><br>
-  <%= button_to 'See comments', post_path(@user.posts) %>
+  <%= post.content %><br>
+
+  <%= link_to 'see comments', post_path(post) %><br>
   
   <% end %>
     
