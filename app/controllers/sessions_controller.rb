@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         redirect_to user_path(@user)
       else
         flash[:notice] = "Sorry, we can't find a user with that username and password"
-        redirect_to new_user_path
+        redirect_to new_user_path, notice: flash[:notice]
       end
     end
   

@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   get 'friends/index'
   get 'friends/destroy'
   resources :friend_requests
-  resources :posts
+  resources :posts do 
+    resources :comments
+  end
+  
   resources :users
    get 'login', to: 'sessions#new'
    post 'login', to: 'sessions#create'

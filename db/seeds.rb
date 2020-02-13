@@ -5,6 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+Post.destroy_all
+
+
 10.times do
     user = User.create({
       username:Faker::Name.name,
@@ -17,20 +22,12 @@
     })
 end
 
+50.times do 
+  post = Post.create({
+    user_id: rand(1..10),
+    content: Faker::Hipster.sentences(2)
+  })
+end
+
+
 puts "=======SEEDED============="
-
-
-#     t.string "username"
-#     t.string "password"
-#     t.string "email"
-#     t.string "name"
-#     t.string "surname"
-#     t.integer "age"
-#     t.text "bio"
-#     t.string "avatar"
-#     t.datetime "created_at", precision: 6, null: false
-#     t.datetime "updated_at", precision: 6, null: false
-
-    #Posts 
-
-

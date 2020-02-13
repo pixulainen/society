@@ -1,9 +1,11 @@
 class PostsController < ApplicationController
     # before_action :authorize_user, only: [:new,:create,:edit,:update,:destroy]
-    # before_action :find_post, only: [:show, :edit, :update, :destroy]
-    # before_action :post_belongs_to_current_user?, only: [:edit, :update, :destroy]
-    def show 
-        @post = Post.find(params[:id])
+    before_action :find_post, only: [:show, :edit, :update, :destroy]
+   # before_action :post_belongs_to_current_user?, only: [:edit, :update, :destroy]
+    #helper_method :current_user :authorize_user
+    
+    def show
+        find_post
     end
 
     def new
@@ -15,10 +17,10 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.create(post_params)
-        @post.user_id = current_user
+        @post.user = current_user
         @post.save
         if @post.valid?
-            redirect_to user_path(@user)
+            redirect_to user_path(current_user)
         else
             render :new
         end
@@ -26,20 +28,21 @@ class PostsController < ApplicationController
     end
 
     def update 
-
         @post.update(post_params)
         redirect_to post_path(@post.id)
     end
 
     def destroy
         Post.destroy(params[:id])
-        redirect to posts_path
+        redirect_to user_path(current_user)
     end
 
-    def find_post
-        Post.find(params[:id])
-    end
+    
     private
+
+    def find_post
+        @post = Post.find(params[:id])
+    end
 
     def post_params
         params.require(:post).permit(:content,:user_id)

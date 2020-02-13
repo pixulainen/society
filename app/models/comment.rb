@@ -1,6 +1,8 @@
 class Comment < ApplicationRecord
+
     belongs_to :post
-    belongs_to :friend, through: :friendship
+    belongs_to :user
+    # belongs_to :friend, through: :friendship
 
 
      # validate :friendly?

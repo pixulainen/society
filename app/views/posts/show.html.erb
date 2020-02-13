@@ -1,4 +1,14 @@
-<%-# @user.name, also in user show page -%><br>
+<p id="notice"><%= notice %></p>
 
-<p><%= post.content %><p><br>
-<p><%= post.date %><p>
+<h2><%= @post.user.fullname%></h2>
+<p><%= @post.content %><p><br>
+<p><%= @post.date %><p>
+
+</div>
+<%= render 'comments/form' %>
+<h2><%= @post.comments.count %> comments</h2>
+    <% @post.comments.each do |comment| %>
+    <%= comment.content %><br>
+    <br>
+
+    <% end %>

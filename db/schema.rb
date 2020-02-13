@@ -14,29 +14,12 @@ ActiveRecord::Schema.define(version: 2020_02_10_084547) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "post_id"
-    t.integer "friend_id"
+    t.integer "user_id"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "friend_requests", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "friend_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["friend_id"], name: "index_friend_requests_on_friend_id"
-    t.index ["user_id"], name: "index_friend_requests_on_user_id"
-  end
-
-  create_table "friendships", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "friend_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["user_id"], name: "index_friendships_on_user_id"
-  end
 
   create_table "likes", force: :cascade do |t|
     t.integer "post_id"
@@ -66,8 +49,4 @@ ActiveRecord::Schema.define(version: 2020_02_10_084547) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "friend_requests", "friends"
-  add_foreign_key "friend_requests", "users"
-  add_foreign_key "friendships", "friends"
-  add_foreign_key "friendships", "users"
 end

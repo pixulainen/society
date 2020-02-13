@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
      
     belongs_to :user
-    has_many :comments, through: :friendships
+    has_many :comments
 
     validates :content, {
         presence: true
