@@ -16,8 +16,18 @@
 <% @a = @user.posts.order(id: :desc)%>
 <% @a.each do |post| %>
   <%= post.content %><br>
-  <%= link_to 'See comments', post_path(post) %>
-  <%= link_to 'Edit Post', edit_post_path(post) %>
+
+  <p><%= post.likes.count %><%= (post.likes.count) == 1 ? ' Like' : ' Likes' %></p>
+    <% before_like = post.likes.find { |like| like.user_id == current_user.id} %>
+        <% if before_like %>
+            <%= button_to 'Unlike', post_like_path(post, before_like), method: :delete %>
+        <% else %>
+            <%= button_to 'Like', post_likes_path(post), method: :post %>
+        <% end %>
+
+  <p><%= post.comments.count %> Comments</p>
+  <%= button_to 'Add comment', post_path(post) %>
+  <%= button_to 'Edit Post', edit_post_path(post) %>
   <%= button_to 'Delete', post, method: :delete, data: {confirm: "Are you sure?"} %>
   <br><br>
 <% end %>
