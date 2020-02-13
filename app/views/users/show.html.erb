@@ -26,9 +26,9 @@
         <% end %>
 
   <p><%= post.comments.count %> Comments</p>
-  <%= button_to 'Add comment', post_path(post) %>
+  <%= button_to 'Add comment', post_path(post), method: :get %>
   <%= button_to 'Edit Post', edit_post_path(post) %>
-  <%= button_to 'Delete', post, method: :delete, data: {confirm: "Are you sure?"} %>
+  <%= button_to 'Delete', post_path(post), method: :delete, data: {confirm: "Are you sure?"} %>
   <br><br>
 <% end %>
 
