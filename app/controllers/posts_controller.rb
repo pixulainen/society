@@ -2,10 +2,9 @@ class PostsController < ApplicationController
     # before_action :authorize_user, only: [:new,:create,:edit,:update,:destroy]
     before_action :find_post, only: [:show, :edit, :update, :destroy]
    # before_action :post_belongs_to_current_user?, only: [:edit, :update, :destroy]
-    #helper_method :current_user :authorize_user
+    helper_method :current_user, :authorize_user
     
     def show
-        find_post
     end
 
     def new
