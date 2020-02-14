@@ -15,6 +15,7 @@
 
 <% @a = @user.posts.order(id: :desc)%>
 <% @a.each do |post| %>
+  <%= post.user.username %><br>
   <%= post.content %><br>
 
   <p><%= post.likes.count %><%= (post.likes.count) == 1 ? ' Like' : ' Likes' %></p>
@@ -25,10 +26,12 @@
             <%= button_to 'Like', post_likes_path(post), method: :post %>
         <% end %>
 
-  <p><%= post.comments.count %> Comments</p>
+  <p><%= post.comments.count %><%= link_to ' Comments', post_path(post), method: :get %></p>
   <%= button_to 'Add comment', post_path(post), method: :get %>
+      <% if current_user && post.user == current_user %>
   <%= button_to 'Edit Post', edit_post_path(post), method: :get %>
   <%= button_to 'Delete', post_path(post), method: :delete, data: {confirm: "Are you sure?"} %>
+      <% end %>
   <br><br>
 <% end %>
 

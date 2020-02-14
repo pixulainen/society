@@ -1,0 +1,6 @@
+<% b = User.all %>
+<% b.each do |user| %>
+    <%= user.avatar %>
+    <%= link_to "#{user.fullname}", user %><br>
+    <%= user. bio%><br><br>
+<% end %>
