@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2020_02_10_084547) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-
   create_table "likes", force: :cascade do |t|
     t.integer "post_id"
     t.integer "user_id"

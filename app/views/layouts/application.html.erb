@@ -10,19 +10,24 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
     <body>
-    <% if flash[:notice] %>
-      <h3><%= flash[:notice] %></h3>
-      <% end %>
+      <% if flash[:notice] %>
+      <div class="alert alert-success" role="alert">
+          <%= flash[:notice] %>
+        </div>
+        <% end %>
+      
+        <% if current_user %>
+          <h2>Hi, <%= current_user.username %>!</h2>
+          <%= link_to "Logout", sessions_path, method: :delete %>
+        <% else %>
+          <%= link_to "Login", new_session_path %>
+        <% end %>
+        
+      <nav class="navbar navbar-dark bg-primary">
 
+      </nav>
      
     <%= yield %>
 
-    <footer class="page-footer font-small blue">
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/education/bootstrap/"> People smarter than us</a>
-  </div>
-  <!-- Copyright -->
-</footer>
   </body>
 </html>

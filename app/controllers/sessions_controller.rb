@@ -1,12 +1,14 @@
 class SessionsController < ApplicationController
+  helper_method :current_user, :authorize_user
 
     def new
     end
-
+    def index
+      redirect_to new_session_path
+    end
     def login
     end
     def welcome 
-
     end
     def create
       @user = User.find_by(username: params[:username])
