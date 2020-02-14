@@ -15,8 +15,12 @@
 <div class="container">
 <% @a = @user.posts.order(id: :desc)%>
 <% @a.each do |post| %>
+<<<<<<< HEAD
 <p><%= post.comments.count %> Comments</p>
 
+=======
+  <%= post.user.username %><br>
+>>>>>>> 57c8819710d6edaedaa9ce1d3db32f7407647a51
   <%= post.content %><br>
 
   <p><%= post.likes.count %><%= (post.likes.count) == 1 ? ' Like' : ' Likes' %></p>
@@ -27,10 +31,19 @@
             <%= button_to 'Like', post_likes_path(post), method: :post,class:"btn btn-success" %>
         <% end %>
 
+<<<<<<< HEAD
   <div class="btn-group" role="toolbar" aria-label="Basic example">
     <%= button_to 'Add comment', post_path(post), method: :get, class:"btn btn-primary btn-sm"%>
     <%= button_to 'Edit Post', edit_post_path(post), method: :get, class:"btn btn-primary btn-sm" %>
     <%= button_to 'Delete Post', post_path(post), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-primary btn-sm" %>
+=======
+  <p><%= post.comments.count %><%= link_to ' Comments', post_path(post), method: :get %></p>
+  <%= button_to 'Add comment', post_path(post), method: :get %>
+      <% if current_user && post.user == current_user %>
+  <%= button_to 'Edit Post', edit_post_path(post), method: :get %>
+  <%= button_to 'Delete', post_path(post), method: :delete, data: {confirm: "Are you sure?"} %>
+      <% end %>
+>>>>>>> 57c8819710d6edaedaa9ce1d3db32f7407647a51
   <br><br>
 <% end %>
 </div>
