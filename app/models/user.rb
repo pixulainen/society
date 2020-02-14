@@ -16,4 +16,16 @@ class User < ApplicationRecord
     def new
         @user = User.new
     end
+    def  self.search(search)
+        if search  
+          user = User.find_by(name: search)
+          if user
+            self.where(user_id: user)
+          else
+            User.all
+          end
+        else
+          User.all
+    end
+end
 end
